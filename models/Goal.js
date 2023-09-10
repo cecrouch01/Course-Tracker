@@ -13,9 +13,6 @@ Goal.init({
     title: {
         type: DataTypes.STRING,
         allowNull: false,
-        validate: {
-            isAlphanumeric: true,
-        }
     },
     description: {
         type: DataTypes.STRING,

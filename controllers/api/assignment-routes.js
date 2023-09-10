@@ -28,4 +28,21 @@ router.get('/:id', async (req, res) => {
     }
 });
 
+router.post('/', withAuth, async (req, res) => {
+    try {
+         // This will create a new assignment
+            // {
+            //     title: "insert title",
+            //     type: "insert type(maybe a drop down menu)" (optional),
+            //     description: "insert description" (optional),
+            //     due_date: "insert due date" (optional)
+            //     //course id will not be sent and need to go through the front end. 
+            // }
+        const newAssignment = await Assignment.create(req.body)
+        res.status(200).json(newAssignment);
+    } catch(err) {
+        res.status(400).json({ message: 'Oops, it seems like there has been an error'})
+    }
+});
+
 module.exports = router;
