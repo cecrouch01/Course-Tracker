@@ -23,7 +23,6 @@ router.post('/subscribe', (req, res) => {
             res.status(201).json(payload);
         })
         .catch(console.log);
-    
 })
 
 router.get('/dashboard', async (req, res) => {

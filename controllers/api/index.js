@@ -11,6 +11,6 @@ router.use('/courses', courseRoutes);
 router.use('/goals', goalRoutes);
 router.use('/notes', noteRoutes);
 router.use('/users', userRoutes);
-router.use('/user-course', userCourseRoutes);
+router.use('/user-courses', userCourseRoutes);
 
 module.exports = router

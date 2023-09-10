@@ -45,4 +45,22 @@ router.post('/', withAuth, async (req, res) => {
     }
 });
 
+router.delete('/:id', withAuth, async (req, res) => {
+    try {
+        const deletedAssignment = await Assignment.destroy({
+            where: {
+                id: req.params.id,
+            },
+        })
+
+        if(!deletedAssignment) {
+            res.status(404).json({ message: 'No Assignment found with this id'})
+            return;
+        }
+        res.status(200).json({ message: 'Assignment has been deleted'})
+    } catch(err) {
+        res.status(500).json(err)
+    }
+});
+
 module.exports = router;
