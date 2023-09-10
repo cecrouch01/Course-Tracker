@@ -1,0 +1,44 @@
+[
+    {
+        "title": "Create your first portfolio website",
+        "type": "Project",
+        "description": "Creating a website that will get you hired!",
+        "course_id": 1
+    },
+    {
+        "title": "Why your page isn't working",
+        "type": "Quiz",
+        "description": "Learning why you have problems",
+        "course_id": 2
+    },
+    {
+        "title": "The proper way to say Hoorah",
+        "type": "Essay",
+        "description": "Linguistic study of Hoorah ",
+        "course_id": 3
+    },
+    {
+        "title": "Whats a Tonga and why it matters to you",
+        "type": "Test",
+        "description": "We all need tongas in our life!",
+        "course_id": 4
+    },
+    {
+        "title": "Picking the correct player week-by-week",
+        "type": "Classwork",
+        "description": "Learning how to win week-in and week-out",
+        "course_id": 5
+    },
+    {
+        "title": "Scheduling: How to fit everything in during the day",
+        "type": "Report",
+        "description": "How to get it all done!",
+        "course_id": 6
+    },
+    {
+        "title": "The frustration of no one knowing your instrument",
+        "type": "Essay",
+        "description": "It hurts that no one knows what we play",
+        "course_id": 7
+    }
+]

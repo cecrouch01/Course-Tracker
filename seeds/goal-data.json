@@ -1,0 +1,26 @@
+[
+    {
+        "title": "All A's",
+        "description": "All classes are As's",
+        "user_id": 1,
+        "course_id": 1        
+    },
+    {
+        "title": "Go to office hours",
+        "description": "Go to office hours for class to better grasp the subject matter",
+        "user_id": 2,
+        "course_id": 2
+    },
+    {
+        "title": "Turn this Assignment in Early",
+        "description": "Turn this assignment two days before due date",
+        "user_id": 3,
+        "assignment_id": 1     
+    },
+    {
+        "title": "Syllabus",
+        "description": "I will not miss this assignment ",
+        "user_id": 4,
+        "assignment_id": 2     
+    }
+]

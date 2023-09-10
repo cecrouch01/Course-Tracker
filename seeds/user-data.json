@@ -1,0 +1,32 @@
+[
+    {
+        "email": "kellerstongatime@example.com",
+        "password": "password",
+        "first_name": "keller",
+        "last_name": "keller"
+    },
+    {
+        "email": "dnttstme@example.com",
+        "password": "password",
+        "first_name": "Alex",
+        "last_name": "Tester"  
+    },
+    {
+        "email": "scsc22@example.com",
+        "password": "password",
+        "first_name": "Sean",
+        "last_name": "Connor"
+    },
+    {
+        "email": "rgard@example.com",
+        "password": "password",
+        "first_name": "Reginald",
+        "last_name": "Gardner"
+    },
+    {
+        "email": "cecrouch01@example.com",
+        "password": "password",
+        "first_name": "Caleb",
+        "last_name": "Crouch"
+    }
+]
