@@ -1,0 +1,25 @@
+/* Resetting some default margins and paddings for a cleaner look */
+body, h1, h2, h3, h4, h5, h6, p, ol, ul {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Simple styles for the navbar */
+.navbar {
+    background-color: #f8f9fa;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Footer styles */
+footer {
+    padding: 20px 0;
+    background-color: #343a40;
+    color: white;
+    text-align: center;
+}

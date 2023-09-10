@@ -1,0 +1,50 @@
+/* Centering the login box */
+.row.justify-content-center {
+    min-height: 100vh;
+    align-items: center; /* This is a flex property to vertically center the content */
+}
+
+.card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Styles for the dashboard */
+.dashboard-section {
+    margin-bottom: 30px;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #004099;
+}
+
+/* Styling for the welcome section and user profile photo */
+.welcome-section {
+    padding: 20px 0;
+    background-color: #f8f9fa;
+}
+
+#profile-photo {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%; 
+    background-color: #ddd;  /* Placeholder background color */
+    margin: 20px auto;  
+    background-image: url('/path/to/profile/image.jpg');  /* Placeholder image */
+    background-size: cover;  /* Ensures the image covers the entire circle */
+    background-position: center;  /* Centers the image */
+}
+
+#progression-section, #reminders-section, #notes-section {
+    border: 1px solid black;  /* Black outline */
+    padding: 20px;  /* Inner spacing */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  /* Shading */
+    margin-bottom: 20px;  /* Space between sections */
+    width: 300px;
+    height: 200px;
+}

@@ -1,14 +1,18 @@
+    <div class="welcome-section text-center mb-5">
+        <h2>Welcome back, {{user}}!</h2>
+        <div id="profile-photo"></div>
+    </div>
 
     <div class="container mt-5">
         <div class="row">
             <!-- Progression Section -->
-            <div class="col-md-6">
+            <div class="col-md-6" id="progression-section">
                 <h3>Progression</h3>
                 <!-- Add progression bar or any other content here -->
             </div>
             
             <!-- Reminders Section -->
-            <div class="col-md-6">
+            <div class="col-md-6" id="reminders-section">
                 <h3>Reminders</h3>
                 <!-- List of reminders can go here -->
             </div>
@@ -16,11 +20,10 @@
 
         <!-- Notes Section -->
         <div class="row mt-4">
-            <div class="col-md-12">
+            <div class="col-md-12" id="notes-section">
                 <h3>Notes</h3>
                 <!-- List of notes can go here. For each note you can have options like edit and delete -->
                 <button class="btn btn-primary">Add Note</button>
             </div>
         </div>
     </div>
-
