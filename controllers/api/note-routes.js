@@ -49,4 +49,23 @@ router.post('/', withAuth, async (req, res) => {
     }
 })
 
+router.delete('/:id', withAuth, async (req, res) => {
+    try {
+        const deletedNote = await Note.destroy({
+            where: {
+                id: req.params.id,
+                user_id: req.session.user_id
+            }
+        })
+
+        if(!deletedNote) {
+            res.status(404).json({ message: "No note found with this id"})
+            return;
+        }
+        res.status(200).json({ message: `Note has been deleted`})
+    } catch(err) {
+        res.status(500).json(err)
+    }
+})
+
 module.exports = router;

@@ -44,6 +44,24 @@ router.post('/', withAuth, async (req, res) => {
     } catch(err) {
         res.status(400).json(err)
     }
+});
+
+router.delete('/:id', withAuth, async (req, res) => {
+    try {
+        const deletedGoal = await Goal.destroy({
+            where: {
+                id: req.params.id,
+                user_id: req.session.user_id
+            },
+        })
+        if(!deletedGoal) {
+            res.status(404).json({ message: 'No goal found'})
+            return;
+        }
+        res.status(200).json({ message: "Goal has been deleted" })
+    } catch(err) {
+        res.status(500).json(err)
+    }
 })
 
 module.exports = router;
