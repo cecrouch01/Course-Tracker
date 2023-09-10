@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Assignment, Course, Goal, Note, User } = require('../../models')
+const { Assignment, Course, Goal, Note, User, UserCourse } = require('../../models')
 const withAuth = require('../../utils/auth');
 
 //This is the /api/courses endpoint
@@ -29,4 +29,17 @@ router.get('/:id', async (req, res) => {
     }
 });
 
+router.post('/', withAuth, async (req, res) => {
+    try {
+        const newCourse = await Course.create(req.body)
+        //This creates an instance of the user junction
+        await UserCourse.create({
+            course_id: newCourse.id,
+            user_id: req.session.user_id
+        })
+        res.status(200).json(newCourse)
+    } catch(err) {
+        res.status(400).json(err)
+    }
+})
 module.exports = router;

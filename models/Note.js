@@ -13,9 +13,6 @@ Note.init({
     title: {
         type: DataTypes.STRING,
         allowNull: false,
-        validate: {
-            isAlphanumeric: true,
-        },
     },
     contents: {
         type: DataTypes.STRING,

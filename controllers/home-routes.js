@@ -40,7 +40,23 @@ router.get('/login', async (req, res) => {
     } catch(err) {
         res.status(500).json(err)
     }
-})
+});
+
+router.get('/', async (req, res) => {
+    try{
+        res.render('homepage')
+    } catch(err) {
+        res.status(500).json(err)
+    }
+});
+
+router.get('/course', async (req, res) => {
+    try{
+        res.render('course')
+    } catch(err) {
+        res.status(500).json(err)
+    }
+});
 
 
 module.exports = router;

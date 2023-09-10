@@ -28,4 +28,25 @@ router.get('/:id', async (req, res) => {
     }
 });
 
+//This will create a note
+router.post('/', withAuth, async (req, res) => {
+    try{
+        const newNote = await Note.create({
+            //This is the necessary req body
+            // {
+            //     title: 'insert title',
+            //     contents: 'instert contents',
+            //     date_created: 'insert date', (optional)
+            //     User id is added through req
+            //     There needs to be a way to tie the correct id of the attached assignment/goal/course
+            // }
+            ...req.body,
+            user_id: req.session.user_id
+        })
+        res.status(200).json(newNote);
+    } catch(err){
+        res.status(500).json(err);
+    }
+})
+
 module.exports = router;
