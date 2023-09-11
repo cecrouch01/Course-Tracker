@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Assignment, Course, Goal, Note, User } = require('../../models')
+const { Assignment, Course, Goal, Note, User, UserAssignment } = require('../../models')
 const withAuth = require('../../utils/auth');
 
 //This is the /api/assignments endpoint
@@ -39,6 +39,11 @@ router.post('/', withAuth, async (req, res) => {
             //     //course id will not be sent and need to go through the front end. 
             // }
         const newAssignment = await Assignment.create(req.body)
+        //This creates an instance of a relationship between user/assignment
+        await UserAssignment.create({
+            assignment_id: newAssignment.id,
+            user_id: req.session.user_id
+        });
         res.status(200).json(newAssignment);
     } catch(err) {
         res.status(400).json({ message: 'Oops, it seems like there has been an error'})
