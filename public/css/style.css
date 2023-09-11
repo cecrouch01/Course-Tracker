@@ -1,3 +1,16 @@
+.bg-image {
+    background-size: cover; 
+    background-attachment: fixed; 
+    background-repeat: no-repeat;
+    height: 100%;
+    filter:blur(10px) sepia(50%);
+    z-index: -1;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+}
+
 /* Centering the login box */
 .row.justify-content-center {
     min-height: 100vh;
@@ -13,14 +26,14 @@
     margin-bottom: 30px;
 }
 
-.btn-primary {
+.orange {
     background-color: #d45113;
     border-color: #d45113;
 }
 
-.btn-primary:hover {
-    background-color: #0056b3;
-    border-color: #004099;
+.orange:hover {
+    background-color: #f9a03f;
+    border-color: #f9a03f;
 }
 
 /* Styling for the welcome section and user profile photo */
