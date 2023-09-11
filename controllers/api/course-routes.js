@@ -32,11 +32,11 @@ router.get('/:id', async (req, res) => {
 router.post('/', withAuth, async (req, res) => {
     try {
         const newCourse = await Course.create(req.body)
-        //This creates an instance of the user junction
+        //This creates an instance of a relationship between the user and course junction
         await UserCourse.create({
             course_id: newCourse.id,
             user_id: req.session.user_id
-        })
+        });
         res.status(200).json(newCourse)
     } catch(err) {
         res.status(400).json(err)

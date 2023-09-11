@@ -4,6 +4,7 @@ const Goal = require('./Goal');
 const Note = require('./Note');
 const User = require('./User');
 const UserCourse = require('./UserCourse');
+const UserAssignment = require('./UserAssignment')
 
 User.belongsToMany(Course, {
     through: UserCourse,
@@ -59,6 +60,12 @@ Assignment.hasMany(Note, {
 Note.belongsTo(Assignment, {
     foreignKey: 'assignment_id',
 });
+Assignment.belongsToMany(User, {
+    through: UserAssignment
+});
+User.belongsToMany(Assignment, {
+    through: UserAssignment
+})
 
 module.exports = {
     Assignment,
@@ -66,5 +73,6 @@ module.exports = {
     Goal,
     Note,
     User,
-    UserCourse
+    UserCourse,
+    UserAssignment
 }
