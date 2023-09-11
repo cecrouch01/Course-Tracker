@@ -1,29 +1,14 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-class Goal extends Model {}
+class UserAssignment extends Model {}
 
-Goal.init({
+UserAssignment.init({
     id: {
         type: DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true,
         autoIncrement: true,
-    },
-    title: {
-        type: DataTypes.STRING,
-        allowNull: false,
-    },
-    description: {
-        type: DataTypes.STRING,
-        allowNull: true,
-    },
-    course_id: {
-        type: DataTypes.INTEGER,
-        references: {
-            model: 'courses',
-            key: 'id',
-        },
     },
     assignment_id: {
         type: DataTypes.INTEGER,
@@ -42,8 +27,8 @@ Goal.init({
 },
 {
     sequelize,
-    modelName: 'goals',
-    timestamps: false,
-});
+    modelName: 'user_assignments',
+    timestamps: false
+})
 
-module.exports = Goal;
+module.exports = UserAssignment;
