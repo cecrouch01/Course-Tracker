@@ -1,4 +1,4 @@
-
+/* Background image for everything */
 .bg-image {
     background-size: cover; 
     background-attachment: fixed; 
@@ -10,6 +10,26 @@
     left: 0px;
     top: 0px;
     width: 100%;
+}
+
+/* Homepage styling for brand and links */
+.navbar-brand,
+.navbar-nav .nav-link {
+    font-family: 'Times New Roman', sans-serif;
+    font-size: 16px; /* You can use the same font size for both brand and links */
+    font-weight: bold;
+    color: #333;
+}
+
+/* Hover effect for both brand and links */
+.navbar-brand:hover,
+.navbar-nav .nav-item .nav-link:hover {
+    color: #ff6600;
+}
+
+/* Brand-specific styling */
+.navbar-brand {
+    font-size: 24px; /* Override font size for the brand if needed */
 }
 
 /* Centering the login box */
