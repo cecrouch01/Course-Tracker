@@ -1,9 +1,10 @@
+
 .bg-image {
     background-size: cover; 
     background-attachment: fixed; 
     background-repeat: no-repeat;
-    height: 100%;
-    filter:blur(10px) sepia(50%);
+    height: 100vh;
+    filter:blur(1px) sepia(50%);
     z-index: -1;
     position: absolute;
     left: 0px;
@@ -36,10 +37,27 @@
     border-color: #f9a03f;
 }
 
+/* Login button */
+.btn-block {
+    background-color: #d45113;
+    border-color: #d45113;
+}
+
+.btn-block:hover {
+    background-color: #f9a03f;
+    border-color: #f9a03f;
+}
+
 /* Styling for the welcome section and user profile photo */
 .welcome-section {
     padding: 20px 0;
-    background-color: #f8f9fa;
+    background: linear-gradient(
+    330deg,
+    #772f1a 20.69%,
+    #d45113 50.19%,
+    #772f1a  79.69%
+  );
+  color: white; /* Text color for the header content */
 }
 
 #profile-photo {
@@ -55,6 +73,13 @@
 
 #progression-section, #reminders-section, #notes-section {
     border: 1px solid black;  /* Black outline */
+    color: white; /* Progression, Notes, Reminders text color */
+    text-shadow:
+        -1px -1px 0px #772f1a, /* Top-left outline shadow */
+         1px -1px 0px #772f1a, /* Top-right outline shadow */
+        -1px  1px 0px #772f1a, /* Bottom-left outline shadow */
+         1px  1px 0px #772f1a; /* Bottom-right outline shadow */
+    backdrop-filter: blur(5px);
     padding: 20px;  /* Inner spacing */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  /* Shading */
     margin-bottom: 20px;  /* Space between sections */
