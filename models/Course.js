@@ -12,10 +12,7 @@ Course.init({
     },
     title: {
         type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-            isAlphanumeric: true,
-        },
+        allowNull: false
     },
     start_date: {
         type: DataTypes.DATE,
