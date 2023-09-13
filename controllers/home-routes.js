@@ -1,13 +1,13 @@
 const router = require('express').Router();
 const webpush = require('web-push');
-const { Assignment, Course, Goal, Note, User, UserAssignment, UserCourse } = require('../models')
-const publicVapidKey = "BJRA9Ov1NkqMUYb0RmC0WJrhMF-8ak-dTljxVqtanouSQYKiQLhz_WUpHVhMwpPqFni0gNO5Ee2LA28UR5809-0";
 
-const privateVapidKey = "E044gkGh3cFatv8GDiRqc1d_U-cncG2j44eTPDlJDTE";
+const publicVapidKey = process.env.VAPID_PUBLIC_KEY;
+const vapidEmail = process.env.VAPID_EMAIL;
+const privateVapidKey = process.env.VAPID_PRIVATE_KEY;
 
 
 // Setup the public and private VAPID keys to web-push library.
-webpush.setVapidDetails("mailto:seanconnor22@gmail.com", publicVapidKey, privateVapidKey);
+webpush.setVapidDetails(`mailto:${vapidEmail}`, publicVapidKey, privateVapidKey);
 
 
 
@@ -19,7 +19,7 @@ router.post('/subscribe', (req, res) => {
     
     
 /*magic*/
-    webpush.sendNotification(subscription, payload)
+    return webpush.sendNotification(subscription, payload)
         .then(()=>{
             res.status(201).json(payload);
         })

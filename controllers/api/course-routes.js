@@ -29,6 +29,29 @@ router.get('/:id', async (req, res) => {
     }
 });
 
+
+router.post('/:id/assignment', withAuth, async (req, res) => {
+    try {
+         // This will create a new assignment
+            // {
+            //     title: "insert title",
+            //     type: "insert type(maybe a drop down menu)" (optional),
+            //     description: "insert description" (optional),
+            //     due_date: "insert due date" (optional)
+            //     //course id will not be sent and need to go through the front end. 
+            // }
+        const newAssignment = await Assignment.create(req.body)
+        //This creates an instance of a relationship between user/assignment
+        await UserAssignment.create({
+            assignment_id: newAssignment.id,
+            user_id: req.session.user_id
+        });
+        res.status(200).json(newAssignment);
+    } catch(err) {
+        res.status(400).json({ message: 'Oops, it seems like there has been an error'})
+    }
+});
+
 router.post('/', withAuth, async (req, res) => {
     try {
         const newCourse = await Course.create(req.body)

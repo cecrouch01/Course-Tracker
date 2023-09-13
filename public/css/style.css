@@ -106,3 +106,7 @@
     width: 300px;
     height: 200px;
 }
+
+.signup-field {
+    display: none;
+}
