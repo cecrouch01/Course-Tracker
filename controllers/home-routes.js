@@ -18,7 +18,7 @@ router.post('/subscribe', (req, res) => {
     
     
 /*magic*/
-    webpush.sendNotification(subscription, payload)
+    return webpush.sendNotification(subscription, payload)
         .then(()=>{
             res.status(201).json(payload);
         })
