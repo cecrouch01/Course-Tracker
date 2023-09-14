@@ -94,9 +94,8 @@ router.get('/course', withAuth, async (req, res) => {
         }
         )
         const course = courseData.get({ plain: true })
-        console.log(course)
         res.render('course', {
-
+            course
         })
     } catch(err) {
         res.status(500).json(err)
