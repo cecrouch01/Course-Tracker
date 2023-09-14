@@ -33,7 +33,7 @@ router.get('/:id/assignments', async (req, res) => {
     }
 });
 
-
+//This gets a single course and its assignments
 router.post('/:id/assignments', withAuth, async (req, res) => {
     try {
          // This will create a new assignment
@@ -56,6 +56,7 @@ router.post('/:id/assignments', withAuth, async (req, res) => {
     }
 });
 
+//this creates a course
 router.post('/', withAuth, async (req, res) => {
     try {
         const newCourse = await Course.create(req.body)
@@ -70,6 +71,7 @@ router.post('/', withAuth, async (req, res) => {
     }
 });
 
+//This deletes an assignment
 router.delete('/assignments/:id', withAuth, async (req, res) => {
     try {
         const deletedAssignment = await Assignment.destroy({
@@ -88,6 +90,7 @@ router.delete('/assignments/:id', withAuth, async (req, res) => {
     }
 });
 
+//this deletes a course
 router.delete('/:id', withAuth, async (req, res) => {
     try {
         const deletedCourse = await Course.destroy({

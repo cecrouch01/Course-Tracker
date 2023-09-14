@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const webpush = require('web-push');
-
+const withAuth = require('../utils/auth');
+const { Assignment, Course, Goal, Note, User, UserCourse} = require('../models')
 const publicVapidKey = process.env.VAPID_PUBLIC_KEY;
 const vapidEmail = process.env.VAPID_EMAIL;
 const privateVapidKey = process.env.VAPID_PRIVATE_KEY;
@@ -26,26 +27,27 @@ router.post('/subscribe', (req, res) => {
         .catch(console.log);
 })
 
-router.get('/dashboard', async (req, res) => {
+router.get('/dashboard', withAuth, async (req, res) => {
     try{
-        // const userData = await User.findByPk(req.params.user_id, {
-        //     include: [
-        //     {
-        //         model: Course,
-        //         through: UserCourse,
-        //         attributes: ['title']
-        //     },
-        //     {
-        //         model: Assignment,
-        //         through: UserAssignment,
-        //         attributes: ['title']
-        //     }            
-        //     ],
-        //     attributes: ['id','first_name']
-        // })
-        // const user = userData.get({ plain: true })
+        const userData = await User.findByPk(req.session.user_id, 
+            {
+            include: [
+            {
+                model: Course,
+                through: UserCourse,
+                include: {
+                    model: Assignment,
+                }   
+            },
+            
+            ],
+            attributes: ['id','email', 'first_name', 'last_name']
+        }
+        )
+        const user = userData.get({ plain: true })
+        console.log(user)
         res.render('dashboard', {
-            // user
+            user
         })
     } catch(err) {
         res.status(500).json(err)
@@ -68,9 +70,34 @@ router.get('/', async (req, res) => {
     }
 });
 
-router.get('/course', async (req, res) => {
+router.get('/course', withAuth, async (req, res) => {
     try{
-        res.render('course')
+        const courseData = await Course.findByPk(1, 
+            {
+            include: [
+                {
+                    model: Assignment
+                },
+                {
+                    model: Note,
+                    where: {
+                        user_id: req.session.user_id
+                    }
+                },
+                {
+                    model: Goal,
+                    where: {
+                        user_id: req.session.user_id
+                    }
+                }
+            ]
+        }
+        )
+        const course = courseData.get({ plain: true })
+        console.log(course)
+        res.render('course', {
+            
+        })
     } catch(err) {
         res.status(500).json(err)
     }
