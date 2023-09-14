@@ -1,8 +1,9 @@
 const router = require('express').Router();
 const webpush = require('web-push');
-const publicVapidKey =process.env.VAPID_PUBLIC_KEY ;
-const vapidEmail =process.env.VAPID_EMAIL ;
-const privateVapidKey =process.env.VAPID_PRIVATE_KEY ;
+
+const publicVapidKey = process.env.VAPID_PUBLIC_KEY;
+const vapidEmail = process.env.VAPID_EMAIL;
+const privateVapidKey = process.env.VAPID_PRIVATE_KEY;
 
 
 // Setup the public and private VAPID keys to web-push library.
@@ -27,7 +28,25 @@ router.post('/subscribe', (req, res) => {
 
 router.get('/dashboard', async (req, res) => {
     try{
-        res.render('dashboard')
+        // const userData = await User.findByPk(req.params.user_id, {
+        //     include: [
+        //     {
+        //         model: Course,
+        //         through: UserCourse,
+        //         attributes: ['title']
+        //     },
+        //     {
+        //         model: Assignment,
+        //         through: UserAssignment,
+        //         attributes: ['title']
+        //     }            
+        //     ],
+        //     attributes: ['id','first_name']
+        // })
+        // const user = userData.get({ plain: true })
+        res.render('dashboard', {
+            // user
+        })
     } catch(err) {
         res.status(500).json(err)
     }

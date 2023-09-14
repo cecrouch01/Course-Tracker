@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { User } = require('../../models');
+const withAuth = require('../../utils/auth');
 
 //this is the /api/users endpoint
 
@@ -64,6 +65,42 @@ router.post('/logout', (req, res) => {
     } else {
         res.status(400).end();
     }
-})
+});
+
+// router.post('/goal/course/:id', withAuth, async (req, res) => {
+//     try{
+//         const newGoal = await Goal.create({
+//             // This will create a new goal
+//             // {
+//             //     title: "insert title here",
+//             //     description: "insert description", (optional)
+//             //     //course_id or assignment_id needs to be attached through the fetch request
+//             // }
+//             ...req.body,
+//             user_id: req.session.user_id,
+//         });
+//         res.status(200).json(newGoal);
+//     } catch(err) {
+//         res.status(400).json(err)
+//     }
+// });
+
+// router.post('/goal/assignment/:id', withAuth, async (req, res) => {
+//     try{
+//         const newGoal = await Goal.create({
+//             // This will create a new goal
+//             // {
+//             //     title: "insert title here",
+//             //     description: "insert description", (optional)
+//             //     //course_id or assignment_id needs to be attached through the fetch request
+//             // }
+//             ...req.body,
+//             user_id: req.session.user_id,
+//         });
+//         res.status(200).json(newGoal);
+//     } catch(err) {
+//         res.status(400).json(err)
+//     }
+// });
 
 module.exports = router;

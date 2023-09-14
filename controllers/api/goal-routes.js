@@ -28,23 +28,7 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-router.post('/', withAuth, async (req, res) => {
-    try{
-        const newGoal = await Goal.create({
-            // This will create a new goal
-            // {
-            //     title: "insert title here",
-            //     description: "insert description", (optional)
-            //     //course_id or assignment_id needs to be attached through the fetch request
-            // }
-            ...req.body,
-            user_id: req.session.user_id,
-        });
-        res.status(200).json(newGoal);
-    } catch(err) {
-        res.status(400).json(err)
-    }
-});
+
 
 router.delete('/:id', withAuth, async (req, res) => {
     try {

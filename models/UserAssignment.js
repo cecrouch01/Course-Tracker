@@ -28,6 +28,8 @@ UserAssignment.init({
 {
     sequelize,
     modelName: 'user_assignments',
+    freezeTableName: true,
+    underscored: true,
     timestamps: false
 })
 
