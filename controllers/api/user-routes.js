@@ -103,7 +103,7 @@ router.post('/', async (req, res) => {
             req.session.user_id = newUser.id;
             req.session.logged_in = true;
         })
-        res.status(200).json({ user: newUser.first_name, message: 'You are now logged in!'})
+        res.redirect('/dashboard');  // redirects user to /dashboard'
     } catch {
         res.status(400).json(err)
     }
@@ -132,7 +132,7 @@ router.post('/login', async (req, res) => {
         req.session.save(() => {
             req.session.user_id = userData.id;
             req.session.logged_in = true;
-            res.status(200).json({ user: userData.first_name, message: 'You are now logged in!'})
+            res.redirect('/dashboard');  // Assuming your dashboard route is '/dashboard'
         })
 
     } catch(err) {
