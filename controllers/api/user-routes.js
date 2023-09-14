@@ -1,19 +1,103 @@
 const router = require('express').Router();
-const { Assignment, Course, Goal, Note, User, UserAssignment } = require('../../models')
+const { Assignment, Course, Goal, Note, User} = require('../../models')
 const withAuth = require('../../utils/auth');
 
-//this is the /api/users endpoint
+//This is the /api/users endpoint
+
+//This allows the user to view a course and its goals and notes
+router.get('/courses/:id/goals/notes', withAuth, async (req, res) => {
+    try {
+        const courseGoalNoteData = await Course.findByPk(req.params.id, {
+            include: [{
+                model: Note,
+                where: {
+                    user_id: req.params.user_id
+                }
+            },
+            {
+                model: Goal,
+                where: {
+                    user_id: req.params.user_id
+                }
+            }
+            ]
+        })
+        if(courseGoalNoteData !== null) {
+            res.status(200).json(courseGoalNoteData) 
+        } else{
+            res.status(400).json({ message: 'Oops, it seems like there has been an error'})
+        }
+    } catch(err) {
+        res.status(500).json(err)
+    }
+})
+
+//This gets an assignment with its goal and notes
+router.get('/assignments/:id/goals/notes', withAuth, async (req, res) => {
+    try {
+        const assignmentNoteGoalData = await Assignment.findByPk(req.params.id, {
+            include:[{
+                model: Note,
+                where: {
+                    user_id: req.session.user_id
+                }
+            },
+            {
+                model: Goal,
+                where: {
+                    user_id: req.session.user_id
+                }
+            }
+            ]
+        })
+        if(assignmentNoteGoalData !== null) {
+            res.status(200).json(assignmentNoteGoalData) 
+        } else{
+            res.status(400).json({ message: 'Oops, it seems like there has been an error'})
+        }
+    } catch(err) {
+        res.status(500).json(err)
+    }
+});
+
+
+//This gets the goal and it's notes
+router.get('/goals/:id/notes', withAuth, async (req, res) => {
+    try{
+        const goalNotesData = await Goal.findByPk(req.params.id, {
+            include: {
+                model: Note,
+                where: {
+                    user_id: req.session.user_id
+                }
+            },
+        });
+        if(goalNotesData !== null) {
+            res.status(200).json(goalNotesData) 
+        } else{
+            res.status(400).json({ message: 'Oops, it seems like there has been an error'})
+        }
+    } catch(err) {
+        res.status(500).json(err)
+    }
+});
+
+//This will create a new user/course relationship
+router.post('/courses/:id', withAuth, async (req, res) => {
+    try {
+        const newUserCourse = UserCourse.create({
+            course_id: req.params.id,
+            user_id: req.session.user_id
+        });
+        res.status(200).json(newUserCourse)
+    } catch(err) {
+        res.status(400).json(err)
+    }
+});
 
 //This will create a user
 router.post('/', async (req, res) => {
     try{
-        // req.body needs to be: 
-        // {
-        //     email: 'insert email here',
-        //     password: 'insert password here',
-        //     first_name: 'insert first name here',
-        //     last_name: 'insert last_name here'
-        // }
         const newUser = await User.create(req.body)
         req.session.save(() => {
             req.session.user_id = newUser.id;
@@ -23,7 +107,7 @@ router.post('/', async (req, res) => {
     } catch {
         res.status(400).json(err)
     }
-})
+});
 //This will log a user in
 router.post('/login', async (req, res) => {
     try {
@@ -54,7 +138,7 @@ router.post('/login', async (req, res) => {
     } catch(err) {
         res.status(400).json(err)
     }
-})
+});
 
 //This will log a user in
 router.post('/logout', (req, res) => {
@@ -67,15 +151,9 @@ router.post('/logout', (req, res) => {
     }
 });
 
-router.post('/goal/course/:id', withAuth, async (req, res) => {
+router.post('/goals/courses/:id', withAuth, async (req, res) => {
     try{
         const newGoal = await Goal.create({
-            // This will create a new goal
-            // {
-            //     title: "insert title here",
-            //     description: "insert description", (optional)
-            //     //course_id or assignment_id needs to be attached through the fetch request
-            // }
             ...req.body,
             course_id: req.params.id,
             user_id: req.session.user_id,
@@ -86,15 +164,9 @@ router.post('/goal/course/:id', withAuth, async (req, res) => {
     }
 });
 
-router.post('/goal/assignment/:id', withAuth, async (req, res) => {
+router.post('/goals/assignments/:id', withAuth, async (req, res) => {
     try{
         const newGoal = await Goal.create({
-            // This will create a new goal
-            // {
-            //     title: "insert title here",
-            //     description: "insert description", (optional)
-            //     //course_id or assignment_id needs to be attached through the fetch request
-            // }
             ...req.body,
             assignment_id: req.params.id,
             user_id: req.session.user_id,
@@ -104,5 +176,86 @@ router.post('/goal/assignment/:id', withAuth, async (req, res) => {
         res.status(400).json(err)
     }
 });
+
+//This will create a course note
+router.post('/notes/courses/:id', withAuth, async (req, res) => {
+    try{
+        const newNote = await Note.create({
+            ...req.body,
+            course_id: req.params.id,
+            user_id: req.session.user_id
+        })
+        res.status(200).json(newNote);
+    } catch(err){
+        res.status(500).json(err);
+    }
+});
+
+//This will create a goal note
+router.post('/notes/goals/:id', withAuth, async (req, res) => {
+    try{
+        const newNote = await Note.create({
+            ...req.body,
+            goal_id: req.params.id,
+            user_id: req.session.user_id
+        })
+        res.status(200).json(newNote);
+    } catch(err){
+        res.status(500).json(err);
+    }
+});
+
+//This will create an assignment note
+router.post('/notes/assignments/:id', withAuth, async (req, res) => {
+    try{
+        const newNote = await Note.create({
+            ...req.body,
+            assignment_id: req.params.id,
+            user_id: req.session.user_id
+        })
+        res.status(200).json(newNote);
+    } catch(err){
+        res.status(500).json(err);
+    }
+});
+
+router.delete('/goals/:id', withAuth, async (req, res) => {
+    try {
+        const deletedGoal = await Goal.destroy({
+            where: {
+                id: req.params.id,
+                user_id: req.session.user_id
+            },
+        })
+        if(!deletedGoal) {
+            res.status(404).json({ message: 'No goal found'})
+            return;
+        }
+        res.status(200).json({ message: "Goal has been deleted" })
+    } catch(err) {
+        res.status(500).json(err)
+    }
+});
+
+router.delete('/notes/:id', withAuth, async (req, res) => {
+    try {
+        const deletedNote = await Note.destroy({
+            where: {
+                id: req.params.id,
+                user_id: req.session.user_id
+            }
+        })
+
+        if(!deletedNote) {
+            res.status(404).json({ message: "No note found with this id"})
+            return;
+        }
+        res.status(200).json({ message: `Note has been deleted`})
+    } catch(err) {
+        res.status(500).json(err)
+    }
+});
+
+
 
 module.exports = router;

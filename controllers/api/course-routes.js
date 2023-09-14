@@ -14,10 +14,14 @@ router.get('/', async (req, res) => {
     }
 });
 
-//This gets a single course
-router.get('/:id', async (req, res) => {
+//This gets a single course with its assignments
+router.get('/:id/assignments', async (req, res) => {
     try{
-        const singleCourseData = await Course.findByPk(req.params.id)
+        const singleCourseData = await Course.findByPk(req.params.id,{
+            include: {
+                model: Assignment
+            }
+        });
         if(singleCourseData !== null) {
             res.status(200).json(singleCourseData) 
         } else{
@@ -30,7 +34,7 @@ router.get('/:id', async (req, res) => {
 });
 
 
-router.post('/:id/assignment', withAuth, async (req, res) => {
+router.post('/:id/assignments', withAuth, async (req, res) => {
     try {
          // This will create a new assignment
             // {
@@ -65,6 +69,43 @@ router.post('/', withAuth, async (req, res) => {
         res.status(400).json(err)
     }
 });
+
+router.delete('/assignments/:id', withAuth, async (req, res) => {
+    try {
+        const deletedAssignment = await Assignment.destroy({
+            where: {
+                id: req.params.id,
+            },
+        })
+
+        if(!deletedAssignment) {
+            res.status(404).json({ message: 'No Assignment found with this id'})
+            return;
+        }
+        res.status(200).json({ message: 'Assignment has been deleted'})
+    } catch(err) {
+        res.status(500).json(err)
+    }
+});
+
+router.delete('/:id', withAuth, async (req, res) => {
+    try {
+        const deletedCourse = await Course.destroy({
+            where: {
+                id: req.params.id,
+            },
+        });
+
+        if(!deletedCourse) {
+            res.status(404).json({ message: 'No Assignment found with this id'})
+            return;
+        }
+        res.status(200).json({ message: 'Assignment has been deleted'})
+    } catch(err) {
+        res.status(500).json(err)
+    }
+});
+
 
 
 module.exports = router;
