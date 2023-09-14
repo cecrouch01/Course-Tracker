@@ -4,7 +4,6 @@
     background-attachment: fixed; 
     background-repeat: no-repeat;
     height: 100vh;
-    filter:blur(1px) sepia(50%);
     z-index: -1;
     position: absolute;
     left: 0px;
