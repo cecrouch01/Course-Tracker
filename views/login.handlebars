@@ -1,95 +1,84 @@
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-4 mt-5">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title text-center" id="form-title">Login</h5>
-                    <form id="login-form" action="/auth" method="POST">
-                        <!-- This hidden field will be used to determine whether it's a login or sign-up action -->
-                        <input type="hidden" name="action" id="form-action" value="login">
+  <div class="row justify-content-center">
+    <div class="col-md-4 mt-5">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title text-center" id="form-title">Login</h5>
 
-                        <!-- Email Field -->
-                        <div class="form-group">
-                            <label for="email">Email:</label>
-                            <input type="email" class="form-control" id="email" name="email" required>
-                        </div>
+          <form id="login-form" action="/auth" method="POST">
+            <!-- This hidden field will be used to determine whether it's a login or sign-up action -->
+            <input type="hidden" name="action" id="form-action" value="login" />
 
-                        <!-- Password Field -->
-                        <div class="form-group">
-                            <label for="password">Password:</label>
-                            <input type="password" class="form-control" id="password" name="password" required>
-                        </div>
-
-                        <!-- Sign Up specific fields (hidden by default) -->
-                        <!-- First Name Field -->
-                        <div class="form-group signup-field">
-                            <label for="first-name">First Name:</label>
-                            <input type="text" class="form-control" id="first-name" name="first_name">
-                        </div>
-                        
-                        <!-- Last Name Field -->
-                        <div class="form-group signup-field">
-                            <label for="last-name">Last Name:</label>
-                            <input type="text" class="form-control" id="last-name" name="last_name">
-                        </div>
-                        
-                        <!-- Confirm Password Field -->
-                        <div class="form-group signup-field">
-                            <label for="confirm-password">Confirm Password:</label>
-                            <input type="password" class="form-control" id="confirm-password" name="confirm_password">
-                        </div>
-
-                        <!-- Submit Button -->
-                        <button type="submit" class="btn btn-primary btn-block">Submit</button>
-                    </form>
-
-                    <!-- Toggle Switch -->
-                    <div class="text-center mt-3">
-                        <a href="#" id="toggle-form">Switch to Sign Up</a>
-                    </div>
-                </div>
+            <!-- Email Field -->
+            <div class="form-group">
+              <label for="email">Email:</label>
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                name="email"
+                required
+              />
             </div>
+
+            <!-- Password Field -->
+            <div class="form-group">
+              <label for="password">Password:</label>
+              <input
+                type="password"
+                class="form-control"
+                id="password"
+                name="password"
+                required
+              />
+            </div>
+
+            <!-- Sign Up specific fields (hidden by default) -->
+            <div class="form-group signup-field">
+              <label for="first-name">First Name:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="first-name"
+                name="first_name"
+              />
+            </div>
+
+            <div class="form-group signup-field">
+              <label for="last-name">Last Name:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="last-name"
+                name="last_name"
+              />
+            </div>
+
+            <div class="form-group signup-field">
+              <label for="confirm-password">Confirm Password:</label>
+              <input
+                type="password"
+                class="form-control"
+                id="confirm-password"
+                name="confirm_password"
+              />
+            </div>
+
+            <!-- Submit Button -->
+            <button
+              type="submit"
+              class="btn btn-primary btn-block"
+            >Submit</button>
+          </form>
+
+          <!-- Toggle Switch -->
+          <div class="text-center mt-3">
+            <a href="#" id="toggle-form">Switch to Sign Up</a>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </div>
 
-<script>
-    // JavaScript to handle the toggle action
-    document.getElementById('toggle-form').addEventListener('click', function(event) {
-        event.preventDefault();
-        const formTitle = document.getElementById('form-title');
-        const signupFields = document.querySelectorAll('.signup-field');
-        
-        if (formTitle.textContent === 'Login') {
-            formTitle.textContent = 'Sign Up';
-            document.getElementById('toggle-form').textContent = 'Switch to Login';
-            signupFields.forEach(field => field.style.display = 'block');
-            
-            // Update hidden field value to sign-up
-            document.getElementById('form-action').value = 'signup';
-        } else {
-            formTitle.textContent = 'Login';
-            document.getElementById('toggle-form').textContent = 'Switch to Sign Up';
-            signupFields.forEach(field => field.style.display = 'none');
-            
-            // Update hidden field value to login
-            document.getElementById('form-action').value = 'login';
-        }
-    });
-
-    // Handle form submission
-    document.getElementById('login-form').addEventListener('submit', function(event) {
-        const action = document.getElementById('form-action').value;
-
-        if (action === 'signup') {
-            const password = document.getElementById('password').value;
-            const confirmPassword = document.getElementById('confirm-password').value;
-
-            if (password !== confirmPassword) {
-                alert('Passwords do not match!');
-                event.preventDefault(); // prevent form submission
-            }
-        }
-    });
-    console.log("Initial state of signup fields:", signupFields[0].style.display);
-</script>
+<script src="js/login.js"></script>

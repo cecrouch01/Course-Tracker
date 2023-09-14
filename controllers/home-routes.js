@@ -7,7 +7,7 @@ const privateVapidKey = process.env.VAPID_PRIVATE_KEY;
 
 
 // Setup the public and private VAPID keys to web-push library.
-webpush.setVapidDetails(`mailto:${vapidEmail}`, publicVapidKey, privateVapidKey);
+// webpush.setVapidDetails(`mailto:${vapidEmail}`, publicVapidKey, privateVapidKey);
 
 
 
