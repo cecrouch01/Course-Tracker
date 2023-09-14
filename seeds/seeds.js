@@ -6,8 +6,6 @@ const goalData = require('./goal-data.json');
 const noteData = require('./note-data.json');
 const userCourseData = require('./user-course-data.json');
 const userData = require('./user-data.json');
-const userAssignmentData = require('./user-assignment-data.json');
-const UserAssignment = require("../models/UserAssignment");
 
 async function seedDatabase() {
     await sequelize.sync({ force: true });
@@ -32,9 +30,6 @@ async function seedDatabase() {
 
     await Note.bulkCreate(noteData);
     console.log('note data successfully seeded');
-
-    await UserAssignment.bulkCreate(userAssignmentData);
-    console.log('User Assignment successfully seeded')
 
     process.exit(0)
 }

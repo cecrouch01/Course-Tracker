@@ -20,6 +20,15 @@ router.post('/subscribe', (req, res) => {
     
     
 /*magic*/
+//userdata
+// cosnt subscription = {
+//     endpoint: userdata.endpoint,
+//     expirationTime: userdata.expirationTime,
+//     keys: {
+//             p256dh: userdata.p256dh,
+//             auth: userdata.auth
+//     }
+// }
     return webpush.sendNotification(subscription, payload)
         .then(()=>{
             res.status(201).json(payload);
