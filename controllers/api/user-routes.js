@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Assignment, Course, Goal, Note, User} = require('../../models')
+const { Assignment, Course, Goal, Note, User, UserCourse} = require('../../models')
 const withAuth = require('../../utils/auth');
 
 //This is the /api/users endpoint
@@ -103,7 +103,7 @@ router.post('/', async (req, res) => {
             req.session.user_id = newUser.id;
             req.session.logged_in = true;
         })
-        res.status(200).json(newUser)
+        res.status(200).json({ user: newUser.first_name, message: 'You are now logged in!'})
     } catch {
         res.status(400).json(err)
     }
@@ -114,7 +114,7 @@ router.post('/login', async (req, res) => {
         const userData = await User.findOne({
             where: {
                 email: req.body.email
-            }
+            },
         })
 
         if(userData === null) {
@@ -132,7 +132,7 @@ router.post('/login', async (req, res) => {
         req.session.save(() => {
             req.session.user_id = userData.id;
             req.session.logged_in = true;
-            res.status(200).json({ user: userData, message: 'You are now logged in!'})
+            res.status(200).json({ user: userData.first_name, message: 'You are now logged in!'})
         })
 
     } catch(err) {
@@ -151,6 +151,7 @@ router.post('/logout', (req, res) => {
     }
 });
 
+//this creates a goal with a course id
 router.post('/goals/courses/:id', withAuth, async (req, res) => {
     try{
         const newGoal = await Goal.create({
@@ -164,6 +165,7 @@ router.post('/goals/courses/:id', withAuth, async (req, res) => {
     }
 });
 
+//This creates a goal with a assignment id
 router.post('/goals/assignments/:id', withAuth, async (req, res) => {
     try{
         const newGoal = await Goal.create({
@@ -219,6 +221,8 @@ router.post('/notes/assignments/:id', withAuth, async (req, res) => {
     }
 });
 
+
+//This deletes a goal
 router.delete('/goals/:id', withAuth, async (req, res) => {
     try {
         const deletedGoal = await Goal.destroy({
@@ -237,6 +241,8 @@ router.delete('/goals/:id', withAuth, async (req, res) => {
     }
 });
 
+
+//this deletes a note
 router.delete('/notes/:id', withAuth, async (req, res) => {
     try {
         const deletedNote = await Note.destroy({
