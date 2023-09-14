@@ -43,6 +43,18 @@ User.init({
             isAlpha: true
         }
     },
+    endpoint: {
+        type: DataTypes.STRING,
+    },
+    expiration_time: {
+        type: DataTypes.INTEGER,
+    },
+    p256dh: {
+        type: DataTypes.STRING,
+    },
+    auth: {
+        type: DataTypes.STRING
+    }
 },
 {
     hooks: {
