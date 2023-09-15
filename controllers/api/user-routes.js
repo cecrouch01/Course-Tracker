@@ -60,6 +60,19 @@ router.get('/assignments/:id/goals/notes', withAuth, async (req, res) => {
     }
 });
 
+// Get all notes for the logged-in user
+router.get('/notes', withAuth, async (req, res) => {
+    try {
+        const userNotes = await Note.findAll({
+            where: {
+                user_id: req.session.user_id
+            }
+        });
+        res.status(200).json(userNotes);
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
 
 //This gets the goal and it's notes
 router.get('/goals/:id/notes', withAuth, async (req, res) => {
@@ -95,6 +108,19 @@ router.post('/courses/:id', withAuth, async (req, res) => {
     }
 });
 
+// Add a new note
+router.post('/notes', withAuth, async (req, res) => {
+    try {
+        const newNote = await Note.create({
+            ...req.body,
+            user_id: req.session.user_id
+        });
+        res.status(200).json(newNote);
+    } catch (err) {
+        res.status(400).json(err);
+    }
+});
+
 //This will create a user
 router.post('/', async (req, res) => {
     try{
@@ -103,7 +129,7 @@ router.post('/', async (req, res) => {
             req.session.user_id = newUser.id;
             req.session.logged_in = true;
         })
-        res.status(200).json({ user: newUser.first_name, message: 'You are now logged in!'})
+        res.redirect('/dashboard');  // redirects user to /dashboard'
     } catch {
         res.status(400).json(err)
     }
@@ -132,7 +158,7 @@ router.post('/login', async (req, res) => {
         req.session.save(() => {
             req.session.user_id = userData.id;
             req.session.logged_in = true;
-            res.status(200).json({ user: userData.first_name, message: 'You are now logged in!'})
+            res.redirect('/dashboard');  // Assuming your dashboard route is '/dashboard'
         })
 
     } catch(err) {

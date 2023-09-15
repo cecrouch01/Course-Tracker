@@ -44,3 +44,10 @@ sequelize.sync({ force: false }).then(() => {
     app.listen(PORT, () => 
     console.log(`Server running on port ${PORT}. To visit site go to http://localhost:${PORT}`))
 })
+
+// This goes after the `app.use(routes);` line
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send('Something broke!');
+  });
+  

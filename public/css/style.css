@@ -1,15 +1,16 @@
 /* Background image for everything */
 .bg-image {
-    background-size: cover; 
-    background-attachment: fixed; 
-    background-repeat: no-repeat;
-    height: 100vh;
+    background-size: 100% auto;
+    /* background-attachment: fixed; */
+    background-repeat: repeat-y;
+    min-height: 100vh;  
     z-index: -1;
     position: absolute;
     left: 0px;
     top: 0px;
     width: 100%;
 }
+
 
 /* Homepage styling for brand and links */
 .navbar-brand,
@@ -91,20 +92,27 @@
 }
 
 #progression-section, #reminders-section, #notes-section {
-    border: 1px solid black;  /* Black outline */
-    color: white; /* Progression, Notes, Reminders text color */
+    border: 1px solid black;  
+    color: white; 
     text-shadow:
-        -1px -1px 0px #772f1a, /* Top-left outline shadow */
-         1px -1px 0px #772f1a, /* Top-right outline shadow */
-        -1px  1px 0px #772f1a, /* Bottom-left outline shadow */
-         1px  1px 0px #772f1a; /* Bottom-right outline shadow */
+        -1px -1px 0px #772f1a, 
+         1px -1px 0px #772f1a, 
+        -1px  1px 0px #772f1a, 
+         1px  1px 0px #772f1a;
     backdrop-filter: blur(5px);
-    padding: 20px;  /* Inner spacing */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  /* Shading */
-    margin-bottom: 20px;  /* Space between sections */
+    padding: 20px;  
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  
+    margin-bottom: 20px;  
+    min-width: 300px;  
+    min-height: 200px;  
+}
+
+#progression-section, #reminders-section {
     width: 300px;
     height: 200px;
+    overflow: auto;  /* Adds scrolling if content overflows */
 }
+
 
 .signup-field {
     display: none;

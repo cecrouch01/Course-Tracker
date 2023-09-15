@@ -1,2 +1,62 @@
-<h1>This is Course</h1>
+
+<div class="bg-image">
+    <div class="container mt-5">
+        <!-- Welcome section -->
+        <div class="welcome-section text-center mb-5">
+            <h2>Welcome to the Course Page, {{user.first_name}}!</h2>
+            <div id="profile-photo"></div>
+        </div>
+
+        <!-- Course details and related elements -->
+        <div class="row">
+            <!-- Course information -->
+            <div class="col-md-6 dashboard-section" id="course-info-section">
+                <h3 class="text-center">Course Information</h3>
+                <p><strong>Course Name:</strong> {{course.title}}</p>
+                <p><strong>Start Date:</strong> {{course.start_date}}</p>
+                <p><strong>End Date:</strong> {{course.end_date}}</p>
+            </div>
+
+            <!-- Assignments related to the course -->
+            <div class="col-md-6 dashboard-section" id="assignments-section">
+                <h3 class="text-center">Assignments</h3>
+                <ul>
+                    {{#each assignments}}
+                    <li>
+                        <h4>{{this.title}}</h4>
+                        <p><strong>Type:</strong> {{this.type}}</p>
+                        <p><strong>Description:</strong> {{this.description}}</p>
+                        <p><strong>Due Date:</strong> {{this.due_date}}</p>
+                        <!-- Edit/Delete links for assignments -->
+                        <a href="/edit-assignment/{{this.id}}">Edit</a> |
+                        <a href="/delete-assignment/{{this.id}}">Delete</a>
+                    </li>
+                    {{/each}}
+                </ul>
+            </div>
+        </div>
+
+        <!-- Notes and other course-related elements -->
+        <div class="row mt-4">
+            <div class="col-md-12 dashboard-section" id="notes-section">
+                <h3 class="text-center">Notes</h3>
+                <button class="btn btn-primary orange add-note-button">Add Note</button>
+                <form class="note-form" style="display: none;">
+                    <div class="form-group">
+                        <label for="note-title">Title</label>
+                        <input type="text" id="note-title" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="note-contents">Contents</label>
+                        <textarea id="note-contents" class="form-control" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Save Note</button>
+                    <button type="button" class="btn btn-secondary cancel-note">Cancel</button>
+                </form>
+            </div>
+        </div>
+
+        <script src="js/notes.js"></script>
+
 <script src="/js/client.js"></script>
+
