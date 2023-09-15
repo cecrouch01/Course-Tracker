@@ -85,7 +85,7 @@
     border-radius: 50%; 
     background-color: #ddd;  /* Placeholder background color */
     margin: 20px auto;  
-    background-image: url('/path/to/profile/image.jpg');  /* Placeholder image */
+    background-image: url('/css/photo-1571931468289-38ebb2c5a1c2 (1).avif');  /* Placeholder image */
     background-size: cover;  /* Ensures the image covers the entire circle */
     background-position: center;  /* Centers the image */
 }
