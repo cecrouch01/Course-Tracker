@@ -1,30 +1,40 @@
-    <div class="welcome-section text-center mb-5">
-        <h2 >Welcome back, {{user.first_name}}!</h2>
-        <div id="profile-photo"></div>
-    </div>
-    <div>
-        <div class="container mt-5">
-            <div class="row">
-                <!-- Progression Section -->
-                <div class="col-md-6" id="progression-section">
-                    <h3 class="text-center border rounded">Progression</h3>
-                    <!-- Add progression bar or any other content here -->
-                </div>
-                
-                <!-- Reminders Section -->
-                <div class="col-md-6" id="reminders-section">
-                    <h3 class="text-center border rounded">Reminders</h3>
-                    <!-- List of reminders can go here -->
-                </div>
+<div class="welcome-section text-center mb-5">
+    <h2>Welcome back, {{user.first_name}}!</h2>
+    <div id="profile-photo"></div>
+</div>
+<div>
+    <div class="container mt-5">
+        <div class="row">
+            <!-- Progression Section -->
+            <div class="col-md-6" id="progression-section">
+                <h3 class="text-center border rounded">Progression</h3>
+                <!-- Add progression bar or any other content here -->
             </div>
 
-            <!-- Notes Section -->
-            <div class="row mt-4">
-                <div class="col-md-12" id="notes-section">
-                    <h3 class="text-center border rounded">Notes</h3>
-                    <!-- List of notes can go here. For each note you can have options like edit and delete -->
-                    <button class="btn btn-primary orange"  >Add Note</button>
-                </div>
+            <!-- Reminders Section -->
+            <div class="col-md-6" id="reminders-section">
+                <h3 class="text-center border rounded">Reminders</h3>
+                <!-- List of reminders can go here -->
             </div>
         </div>
-    </div>
+
+        <!-- Notes Section -->
+        <div class="row mt-4">
+            <div class="col-md-12" id="notes-section">
+                <button class="btn btn-primary orange add-note-button">Add Note</button>
+                <form class="note-form" style="display: none;">
+                    <div class="form-group">
+                        <label for="note-title">Title</label>
+                        <input type="text" id="note-title" class="form-control" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="note-contents">Contents</label>
+                        <textarea id="note-contents" class="form-control" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Save Note</button>
+                    <button type="button" class="btn btn-secondary cancel-note">Cancel</button>
+                </form>
+            </div>
+        </div>
+
+        <script src="js/notes.js"></script>
