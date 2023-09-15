@@ -50,6 +50,10 @@ router.post('/:id/assignments', withAuth, async (req, res) => {
             assignment_id: newAssignment.id,
             user_id: req.session.user_id
         });
+        //each user
+        //for each user where either endpoint edhnumbers and auth are not null
+        //webpush
+        //
         res.status(200).json(newAssignment);
     } catch(err) {
         res.status(400).json({ message: 'Oops, it seems like there has been an error'})

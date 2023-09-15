@@ -13,9 +13,16 @@ webpush.setVapidDetails(`mailto:${vapidEmail}`, publicVapidKey, privateVapidKey)
 
 
 // Create route for allow client to subscribe to push notification.
-router.post('/subscribe', (req, res) => {
+router.post('/subscribe', async (req, res) => {
     const subscription = req.body;
     console.log(subscription);
+    const user = await User.findByPk(req.session.user_id)
+    await user.update({
+        endpoint: subscription.endpoint,
+        expiration_time: subscription.expirationTime,
+        p256dh: subscription.keys.p256dh,
+        auth: subscription.keys.auth
+    });
     const payload = JSON.stringify({ title: "Hello World", body: "This is your first push notification" });
     
     
@@ -29,7 +36,7 @@ router.post('/subscribe', (req, res) => {
 //             auth: userdata.auth
 //     }
 // }
-    return webpush.sendNotification(subscription, payload)
+        await webpush.sendNotification(subscription, payload)
         .then(()=>{
             res.status(201).json(payload);
         })
@@ -55,6 +62,7 @@ router.get('/dashboard', withAuth, async (req, res) => {
         )
         const user = userData.get({ plain: true })
         console.log(user)
+        //await web push
         res.render('dashboard', {
             user
         })
