@@ -1,5 +1,4 @@
 
-
 async function registerServiceWorker() {
     const register = await navigator.serviceWorker.register('./worker.js', {
         scope: '/'
