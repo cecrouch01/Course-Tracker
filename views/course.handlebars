@@ -1,1 +1,33 @@
-<h1>This is Course</h1>
+<div class="bg-image">
+    <div class="container mt-5">
+        <!-- Welcome section -->
+        <div class="welcome-section text-center mb-5">
+            <h2>Welcome to the Course Page, {{user.first_name}}!</h2>
+            <div id="profile-photo"></div>
+        </div>
+
+        <!-- Course details and related elements -->
+        <div class="row">
+            <!-- Course information -->
+            <div class="col-md-6 dashboard-section" id="course-info-section">
+                <h3 class="text-center">Course Information</h3>
+                <!-- Course details can go here. Example: Course Name, Instructor, Duration, etc. -->
+            </div>
+
+            <!-- Assignments related to the course -->
+            <div class="col-md-6 dashboard-section" id="assignments-section">
+                <h3 class="text-center">Assignments</h3>
+                <!-- List of assignments can go here. For each assignment, you can have options like view, edit, and delete -->
+            </div>
+        </div>
+
+        <!-- Notes and other course-related elements -->
+        <div class="row mt-4">
+            <div class="col-md-12 dashboard-section" id="notes-section">
+                <h3 class="text-center">Notes</h3>
+                <!-- List of notes can go here. For each note, you can have options like edit and delete -->
+                <button class="btn btn-primary orange">Add Note</button>
+            </div>
+        </div>
+    </div>
+</div>
