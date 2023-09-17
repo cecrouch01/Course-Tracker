@@ -43,6 +43,10 @@ User.init({
             isAlpha: true
         }
     },
+    subscription: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false
+    },
     endpoint: {
         type: DataTypes.STRING,
     },

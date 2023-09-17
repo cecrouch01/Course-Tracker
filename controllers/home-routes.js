@@ -14,34 +14,16 @@ webpush.setVapidDetails(`mailto:${vapidEmail}`, publicVapidKey, privateVapidKey)
 
 // Create route for allow client to subscribe to push notification.
 router.post('/subscribe', async (req, res) => {
-    const subscription = req.body;
-    console.log(subscription);
+    const sub = req.body;
     const user = await User.findByPk(req.session.user_id)
     await user.update({
-        endpoint: subscription.endpoint,
-        expiration_time: subscription.expirationTime,
-        p256dh: subscription.keys.p256dh,
-        auth: subscription.keys.auth
+        subscription: true,
+        endpoint: sub.endpoint,
+        expiration_time: sub.expirationTime,
+        p256dh: sub.keys.p256dh,
+        auth: sub.keys.auth
     });
-    const payload = JSON.stringify({ title: "Hello World", body: "This is your first push notification" });
-    
-    
-/*magic*/
-//userdata
-// cosnt subscription = {
-//     endpoint: userdata.endpoint,
-//     expirationTime: userdata.expirationTime,
-//     keys: {
-//             p256dh: userdata.p256dh,
-//             auth: userdata.auth
-//     }
-// }
-        await webpush.sendNotification(subscription, payload)
-        .then(()=>{
-            res.status(201).json(payload);
-        })
-        .catch(console.log);
-})
+});
 
 router.get('/dashboard', withAuth, async (req, res) => {
     try{
@@ -61,10 +43,10 @@ router.get('/dashboard', withAuth, async (req, res) => {
         }
         )
         const user = userData.get({ plain: true })
-        console.log(user)
         //await web push
         res.render('dashboard', {
-            user
+            user,
+            logged_in: req.session.logged_in 
         })
     } catch(err) {
         res.status(500).json(err)
@@ -73,6 +55,10 @@ router.get('/dashboard', withAuth, async (req, res) => {
 
 router.get('/login', async (req, res) => {
     try{
+        if(req.session.logged_in) {
+            res.redirect('/dashboard')
+            return;
+        }
         res.render('login')
     } catch(err) {
         res.status(500).json(err)
@@ -81,38 +67,43 @@ router.get('/login', async (req, res) => {
 
 router.get('/', async (req, res) => {
     try{
-        res.render('homepage')
+        res.render('homepage', {
+            logged_in: req.session.logged_in 
+        })
     } catch(err) {
         res.status(500).json(err)
     }
 });
 
-router.get('/course', withAuth, async (req, res) => {
+router.get('/course/:id', withAuth, async (req, res) => {
     try{
-        const courseData = await Course.findByPk(1, 
-            {
+        const courseData = await Course.findByPk(req.params.id, {
             include: [
                 {
                     model: Assignment
-                },
-                {
-                    model: Note,
-                    where: {
-                        user_id: req.session.user_id
-                    }
-                },
-                {
-                    model: Goal,
-                    where: {
-                        user_id: req.session.user_id
-                    }
                 }
             ]
-        }
-        )
+        });
+        const userCourseGoals = await Goal.findAll({
+            where: {
+                course_id: req.params.id,
+                user_id: req.session.user_id
+            }
+        });
+        const userCourseNotes = await Note.findAll({
+            where: {
+                course_id: req.params.id,
+                user_id: req.session.user_id
+            }
+        })
+        const goals = userCourseGoals.map((goal) => goal.get({ plain: true }))
+        const notes = userCourseNotes.map((note) => note.get({ plain: true }))
         const course = courseData.get({ plain: true })
         res.render('course', {
-            course
+            course,
+            goals,
+            notes,
+            logged_in: req.session.logged_in 
         })
     } catch(err) {
         res.status(500).json(err)
