@@ -2,9 +2,9 @@ const addGoalForm = document.getElementById('add-goal');
 const courseID = document.getElementById('course-id').value;
 const addAssignmentForm = document.getElementById('add-assignment');
 const addNoteForm = document.getElementById('add-note');
-const showGoalFormBtn = document.querySelector('.show-goal-form');
-const showAssignmentFormBtn = document.querySelector('.show-assignment-form');
-const showNoteFormBtn = document.querySelector('.show-note-form');
+const showGoalFormBtn = document.getElementById('show-goal-form');
+const showAssignmentFormBtn = document.getElementById('show-assignment-form');
+const showNoteFormBtn = document.getElementById('show-note-form');
 
 //This creates a Course goal
 const addGoal = async (event) => {

@@ -130,7 +130,7 @@ router.post('/', async (req, res) => {
             req.session.logged_in = true;
         })
         res.redirect('/dashboard');  // redirects user to /dashboard'
-    } catch {
+    } catch(err) {
         res.status(400).json(err)
     }
 });
