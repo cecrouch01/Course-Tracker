@@ -40,8 +40,11 @@ app.use(express.urlencoded({ extended: true}));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(routes);
+async function stuff(){
+    await sequelize.drop();
+}
 
-await sequelize.drop();
+stuff();
 
 sequelize.sync({ force: false }).then(() => {
     app.listen(PORT, () => 
