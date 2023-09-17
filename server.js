@@ -40,15 +40,13 @@ app.use(express.urlencoded({ extended: true}));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(routes);
-async function stuff(){
-    await sequelize.drop();
-}
 
-stuff();
 
-sequelize.sync({ force: false }).then(() => {
-    app.listen(PORT, () => 
-    console.log(`Server running on port ${PORT}. To visit site go to http://localhost:${PORT}`))
+sequelize.drop().then(() => {
+    sequelize.sync({ force: false }).then(() => {
+        app.listen(PORT, () => 
+        console.log(`Server running on port ${PORT}. To visit site go to http://localhost:${PORT}`))
+    })
 })
 
 // This goes after the `app.use(routes);` line
