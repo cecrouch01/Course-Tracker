@@ -14,8 +14,8 @@
     
 </head>
 <body>
-    <div id="page-container">
-        <div id="content-wrap">
+    {{!-- <div id="page-container">
+        <div id="content-wrap"> --}}
             <nav class="navbar navbar-expand-lg">
                 <div class="container">
                     <a class="navbar-brand" href="/">Course Tracker</a>
@@ -48,18 +48,18 @@
 
    
 <!-- Footer -->
-    {{!-- <footer class="footer" id="footer">
+    <footer class="footer" id="footer">
         <div class="container">
             <div class="footer-content">
                 <p>&copy; 2023 Course Tracker. Made with 💔</p>
             </div>
         </div>
-    </footer> --}}
+    </footer>
 <!-- for additional scripts here if needed -->
 {{#if logged_in}}
 <script src='/js/logout.js'></script>
 {{/if}}
-        </div>
-    </div>  
+        {{!-- </div>
+    </div>   --}}
 </body>
 </html>

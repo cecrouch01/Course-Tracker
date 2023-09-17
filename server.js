@@ -8,6 +8,7 @@ const helpers = require('./utils/helpers');
 const routes = require('./controllers/index');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
+
 const app = express();
 const PORT = process.env.PORT || 3001;
 
@@ -40,7 +41,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(routes);
 
-sequelize.sync({ force: true }).then(() => {
+await sequelize.drop();
+
+sequelize.sync({ force: false }).then(() => {
     app.listen(PORT, () => 
     console.log(`Server running on port ${PORT}. To visit site go to http://localhost:${PORT}`))
 })
