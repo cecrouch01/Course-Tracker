@@ -1,7 +1,23 @@
+#page-container {
+    position: relative;
+    min-height: 100vh;
+  }
+  
+#content-wrap {
+    padding-bottom: 2.5rem;  
+  }
+
+#footer {
+position: absolute;
+bottom: 0;
+left: 0;
+right: 0;
+height: 2.5rem;    
+}
 /* Background image for everything */
 .bg-image {
     background-size: 100% auto;
-    /* background-attachment: fixed; */
+    background-attachment: fixed;
     background-repeat: repeat-y;
     min-height: 100vh;  
     z-index: -1;
@@ -11,7 +27,25 @@
     width: 100%;
 }
 
+ul {
+    list-style-type: none;
+}
 
+#add-course {
+    display: none;
+}
+
+#add-note {
+    display: none;
+}
+
+#add-assignment {
+    display: none;
+}
+
+#add-goal {
+    display: none;
+}
 /* Homepage styling for brand and links */
 .navbar-brand,
 .navbar-nav .nav-link {
@@ -45,6 +79,17 @@
 /* Styles for the dashboard */
 .dashboard-section {
     margin-bottom: 30px;
+}
+#course-id {
+    display: none;
+}
+.cancel-btn {
+    background-color: gray;
+    border-color: gray;
+}
+.cancel-btn:hover {
+    background-color: rgb(211, 205, 205);
+    border-color: gray;
 }
 
 .orange {
@@ -90,8 +135,14 @@
     background-size: cover;  /* Ensures the image covers the entire circle */
     background-position: center;  /* Centers the image */
 }
+a {
+    color: white;
+}
+a:hover {
+    color: white;
+}
 
-#progression-section, #reminders-section, #notes-section {
+.section {
     border: 1px solid black;  
     color: white; 
     text-shadow:
@@ -116,4 +167,9 @@
 
 .signup-field {
     display: none;
+}
+
+
+.footer-content {
+    width: 100%;
 }

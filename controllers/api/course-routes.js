@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { Assignment, Course, Goal, Note, User, UserCourse } = require('../../models')
 const withAuth = require('../../utils/auth');
+const webpush = require('web-push');
 
 //This is the /api/courses endpoint
 
@@ -33,27 +34,32 @@ router.get('/:id/assignments', async (req, res) => {
     }
 });
 
-//This gets a single course and its assignments
+//This creates an assignment attached to its course
 router.post('/:id/assignments', withAuth, async (req, res) => {
     try {
-         // This will create a new assignment
-            // {
-            //     title: "insert title",
-            //     type: "insert type(maybe a drop down menu)" (optional),
-            //     description: "insert description" (optional),
-            //     due_date: "insert due date" (optional)
-            //     //course id will not be sent and need to go through the front end. 
-            // }
-        const newAssignment = await Assignment.create(req.body)
-        //This creates an instance of a relationship between user/assignment
-        await UserAssignment.create({
-            assignment_id: newAssignment.id,
-            user_id: req.session.user_id
+        const newAssignment = await Assignment.create({
+            ...req.body,
+            course_id: req.params.id
         });
-        //each user
-        //for each user where either endpoint edhnumbers and auth are not null
-        //webpush
-        //
+        const course = await Course.findByPk(req.params.id, {
+            include: [
+                {
+                    model: User,
+                    through: UserCourse,
+                    where: {
+                        subscription: true
+                    }
+                }
+            ]
+        })
+
+        // For each user in the course send a notification
+        for(let i = 0; i < course.users.length; i++) {
+            const sub = { endpoint: course.users[i].endpoint, expirationTime: course.users[i].expiration_time, keys: { p256dh: course.users[i].p256dh, auth: course.users[i].auth}};
+            const payload = JSON.stringify({ title: "New Assignment", body: `Assignment has been created for ${course.title}`})
+            await webpush.sendNotification(sub, payload)
+        }
+
         res.status(200).json(newAssignment);
     } catch(err) {
         res.status(400).json({ message: 'Oops, it seems like there has been an error'})

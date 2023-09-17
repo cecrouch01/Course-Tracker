@@ -1,4 +1,3 @@
-
 <div class="bg-image">
     <div class="container mt-5">
         <!-- Welcome section -->
@@ -10,53 +9,113 @@
         <!-- Course details and related elements -->
         <div class="row">
             <!-- Course information -->
-            <div class="col-md-6 dashboard-section" id="course-info-section">
+            <div class="col-md-6 dashboard-section section" id="course-info-section">
                 <h3 class="text-center">Course Information</h3>
                 <p><strong>Course Name:</strong> {{course.title}}</p>
                 <p><strong>Start Date:</strong> {{course.start_date}}</p>
                 <p><strong>End Date:</strong> {{course.end_date}}</p>
+                <h3 class="text-center">Course Goals</h3>
+                <ul>
+                    {{#each goals}}
+                    <li>{{this.title}}: {{this.description}}</li>
+                    {{/each}}
+                </ul>
+                <button type="submit" class="btn btn-primary orange show-goal-form">Add Goal</button>
+                <form id="add-goal">
+                    <h3 class="text-center">Create Course Goal</h3>
+                    <div class="mb-3">
+                        <label for="formGroupExampleInput" class="form-label">Course Goal</label>
+                        <input class="form-control" id="add-goal-title" name="title" 
+                            required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="formGroupExampleInput" class="form-label">Goal Description</label>
+                        <input class="form-control" id="add-goal-description" name="description"
+                           >
+                    </div>
+                    <input type="hidden" name="action" id="course-id" value={{course.id}} />
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-primary orange">Submit</button>
+                        <button type="submit" id="cancel-goal" class="btn btn-primary cancel-btn">Cancel</button>
+                    </div>
+                </form>
             </div>
 
             <!-- Assignments related to the course -->
-            <div class="col-md-6 dashboard-section" id="assignments-section">
+            <div class="col-md-6 dashboard-section section" id="assignments-section">
                 <h3 class="text-center">Assignments</h3>
                 <ul>
-                    {{#each assignments}}
+                    {{#each course.assignments}}
                     <li>
                         <h4>{{this.title}}</h4>
-                        <p><strong>Type:</strong> {{this.type}}</p>
+                        {{!-- <p><strong>Type:</strong> {{this.type}}</p>
                         <p><strong>Description:</strong> {{this.description}}</p>
                         <p><strong>Due Date:</strong> {{this.due_date}}</p>
                         <!-- Edit/Delete links for assignments -->
                         <a href="/edit-assignment/{{this.id}}">Edit</a> |
-                        <a href="/delete-assignment/{{this.id}}">Delete</a>
+                        <a href="/delete-assignment/{{this.id}}">Delete</a> --}}
                     </li>
                     {{/each}}
                 </ul>
-            </div>
-        </div>
-
-        <!-- Notes and other course-related elements -->
-        <div class="row mt-4">
-            <div class="col-md-12 dashboard-section" id="notes-section">
-                <h3 class="text-center">Notes</h3>
-                <button class="btn btn-primary orange add-note-button">Add Note</button>
-                <form class="note-form" style="display: none;">
-                    <div class="form-group">
-                        <label for="note-title">Title</label>
-                        <input type="text" id="note-title" class="form-control" required>
+                <button type="submit" class="btn btn-primary orange show-assignment-form">Add Assignment</button>
+                <form id="add-assignment">
+                    <h3 class="text-center">Create Assignment</h3>
+                    <div class="mb-3">
+                        <label for="formGroupExampleInput" class="form-label">Assignment Title</label>
+                        <input class="form-control" id="add-assignment-title" name="title"
+                            required>
                     </div>
-                    <div class="form-group">
-                        <label for="note-contents">Contents</label>
-                        <textarea id="note-contents" class="form-control" required></textarea>
+                    <div class="mb-3">
+                        <label for="formGroupExampleInput" class="form-label">Assignment </label>
+                        <input class="form-control" id="add-assignment-type" name="type"
+                            >
                     </div>
-                    <button type="submit" class="btn btn-primary">Save Note</button>
-                    <button type="button" class="btn btn-secondary cancel-note">Cancel</button>
+                    <div class="mb-3">
+                        <label for="formGroupExampleInput" class="form-label">Assignment Description</label>
+                        <input class="form-control" id="add-assignment-description"
+                            name="description" >
+                    </div>
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-primary orange">Submit</button>
+                        <button type="submit" id="cancel-assignment" class="btn btn-primary cancel-btn">Cancel</button>
+                    </div>
                 </form>
             </div>
         </div>
+    </div>
 
-        <script src="js/notes.js"></script>
-
+    <!-- Notes and other course-related elements -->
+    <div class="row mt-4">
+        <div class="col-md-12 dashboard-section section" id="notes-section">
+            <h3 class="text-center">Course Notes</h3>
+            {{#each notes}}
+            <h4>{{this.title}}</h4>
+            <ul>
+                <li>
+                    {{this.contents}}
+                </li>
+            </ul>
+            {{/each}}
+            <button type="submit" class="btn btn-primary orange show-note-form">Add Note</button>
+            <form id="add-note">
+                <h3 class="text-center">Create Note</h3>
+                <div class="mb-3">
+                    <label for="formGroupExampleInput" class="form-label">Title</label>
+                    <input class="form-control" id="add-note-title" name="title"
+                        required>
+                </div>
+                <div class="mb-3">
+                    <label for="formGroupExampleInput" class="form-label">Contents </label>
+                    <textarea class="form-control" id="add-note-contents" name="contents"
+                        ></textarea>
+                </div>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary orange">Submit</button>
+                    <button type="submit" id="cancel-note" class="btn btn-primary cancel-btn">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="/js/course.js"></script>
 <script src="/js/client.js"></script>
-

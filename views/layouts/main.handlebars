@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <title>{{title}}</title>
+    <title>Course Tracker</title>
     <link href="/css/jass.css" rel="stylesheet">
     <link href="/css/style.css" rel="stylesheet">
     {{{ vapid_public_key }}}
@@ -12,31 +12,32 @@
     
 </head>
 <body>
-<nav class="navbar navbar-expand-lg">
-    <div class="container">
-        <a class="navbar-brand" href="#">Course Tracker</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">About</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Contact</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Logout</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
-
+    <div id="page-container">
+        <div id="content-wrap">
+            <nav class="navbar navbar-expand-lg">
+                <div class="container">
+                    <a class="navbar-brand" href="/">Course Tracker</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav ml-auto">
+                            {{#if logged_in}}
+                            <li class="nav-item active">
+                                <a class="nav-link" href="/dashboard">Dashboard</a>
+                            </li>
+                            <li class="nav-item">
+                                <button class="nav-link" id="logout">Logout</button>
+                            </li>
+                            {{else}}
+                            <li>
+                                <a class="nav-link" href="/login">Login</a> 
+                            </li>
+                            {{/if}}
+                        </ul>
+                    </div>
+                </div>
+            </nav>     
     <!-- Where the content of the individual pages will be added -->
     <img class="bg-image" src="/css/alisa-anton-SiKMqywFKWA-unsplash.jpg"/> 
     <section>
@@ -45,15 +46,18 @@
 
    
 <!-- Footer -->
-    <footer class="footer fixed-bottom">
+    {{!-- <footer class="footer" id="footer">
         <div class="container">
             <div class="footer-content">
                 <p>&copy; 2023 Course Tracker. Made with 💔</p>
             </div>
         </div>
-    </footer>
-
-
-    <!-- for additional scripts here if needed -->
+    </footer> --}}
+<!-- for additional scripts here if needed -->
+{{#if logged_in}}
+<script src='/js/logout.js'></script>
+{{/if}}
+        </div>
+    </div>  
 </body>
 </html>
