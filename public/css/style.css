@@ -1,5 +1,7 @@
 #page-container {
     position: relative;
+    display: flex;
+    flex-direction: column;
     min-height: 100vh;
   }
 
@@ -8,9 +10,11 @@
 }
   
 #content-wrap {
-    padding-bottom: 2.5rem;  
+    /*padding-bottom: 2.5rem; */ 
+    flex: 1;
   }
 
+<<<<<<< Updated upstream
 .navbar-nav {
     display: flex;
     -ms-flex-direction: column;
@@ -26,9 +30,18 @@
 #footer {
 /* position: absolute; */
 /* bottom: 0;
+=======
+footer {
+  margin-bottom: 0;
+bottom: 0;
+>>>>>>> Stashed changes
 left: 0;
-right: 0; */
-height: 2.5rem;    
+right: 0; 
+padding: 20px 0;
+background-color: #343a40;
+color: white;
+text-align: center;
+width: 100%;
 }
 /* Background image for everything */
 .bg-image {
@@ -191,11 +204,13 @@ a:hover {
     display: none;
 }
 
-
-.footer-content {
-    width: 100%;
-}
-
 .custom-control-input:checked ~ .custom-control-label::before {
-    background-color: #28a745;
+    background-color: #28a745; 
 }
+
+body, html {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+}
+
