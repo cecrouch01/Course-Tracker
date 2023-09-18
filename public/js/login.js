@@ -23,8 +23,6 @@ document.addEventListener("DOMContentLoaded", function () {
           document.getElementById("form-action").value = "login";
       }
   }
-  // toggleForm(); 
-
 
   function setInitialState() {
     const formTitle = document.getElementById("form-title");
