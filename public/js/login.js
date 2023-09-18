@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       if (formTitle.textContent === "Login") {
           formTitle.textContent = "Sign Up";
-          document.querySelector('label[for="loginSwitch"]').textContent = "Switch to Login";
+          document.querySelector('label[for="customSwitch1"]').textContent = "Switch to Login";
           signupFields.forEach((field) => (field.style.display = "block"));
           formElement.action = "api/users"; // Set action for sign up
 
@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
           document.getElementById("form-action").value = "signup";
       } else {
           formTitle.textContent = "Login";
-          document.querySelector('label[for="loginSwitch"]').textContent = "Switch to Sign Up";
+          document.querySelector('label[for="customSwitch1"]').textContent = "Switch to Sign Up";
           signupFields.forEach((field) => (field.style.display = "none"));
           formElement.action = "api/users/login"; // Set action for login
 
@@ -23,9 +23,25 @@ document.addEventListener("DOMContentLoaded", function () {
           document.getElementById("form-action").value = "login";
       }
   }
+  // toggleForm(); 
 
+
+  function setInitialState() {
+    const formTitle = document.getElementById("form-title");
+    const formElement = document.getElementById("login-form");
+
+    formTitle.textContent = "Login";
+    document.querySelector('label[for="customSwitch1"]').textContent = "Switch to Sign Up";
+    signupFields.forEach((field) => (field.style.display = "none"));
+    formElement.action = "api/users/login";
+
+    // Set hidden field value to login
+    document.getElementById("form-action").value = "login";
+}
+
+setInitialState();
   // Handle switch toggle
-  document.getElementById('loginSwitch').addEventListener('change', toggleForm);
+  document.getElementById('customSwitch1').addEventListener('change', toggleForm);
 
   // Handle form submission
   document.getElementById("login-form").addEventListener("submit", function (event) {
@@ -45,4 +61,4 @@ document.addEventListener("DOMContentLoaded", function () {
   console.log("Initial state of signup fields:", signupFields[0].style.display);
 });
 
-console.log("Script loaded");
+
