@@ -2,10 +2,26 @@
     position: relative;
     min-height: 100vh;
   }
+
+.nav-item {
+    margin: 5px;
+}
   
 #content-wrap {
     padding-bottom: 2.5rem;  
   }
+
+.navbar-nav {
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: row;
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+}
+#course-section {
+    height: 90%;
+}
 
 #footer {
 /* position: absolute; */
@@ -70,6 +86,12 @@ ul {
 .row.justify-content-center {
     min-height: 100vh;
     align-items: center; /* This is a flex property to vertically center the content */
+}
+
+.page-contents {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
 }
 
 .card {

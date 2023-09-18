@@ -4,7 +4,7 @@
 </div>
 <div>
     <div class="container mt-5">
-        <div class="row">
+        <div class="row page-contents">
             <div class="col-md-3">
                 <div class="col-md-6 section" id="course-section">
                         <h3 class="text-center border rounded">{{user.first_name}}'s Courses</h3>
@@ -29,17 +29,25 @@
                         </form>
                 </div>
             </div>
-            <div class="col-md-9">
+            <div class="col-md-8">
                 <div class="row">
                     <!-- Progression Section -->
                     <div class="col-md-6 section" id="progression-section">
                         <h3 class="text-center border rounded">Progression</h3>
-                        <!-- Add progression bar or any other content here -->
+                        <h3 class="text-center">Work in Progress</h3>
                     </div>
 
                     <!-- Reminders Section -->
                     <div class="col-md-6 section" id="reminders-section">
                         <h3 class="text-center border rounded">Reminders</h3>
+                        <h4>Assignments:</h4>
+                        <ul>
+                        {{#each user.courses}}
+                        {{#each this.assignments}}
+                            <li>{{this.title}}</li>
+                        {{/each}}
+                        {{/each}}
+                        </ul>
                         <!-- List of reminders can go here -->
                     </div>
                 </div>
