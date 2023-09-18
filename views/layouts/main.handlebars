@@ -28,7 +28,6 @@
                         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-<<<<<<< Updated upstream
                     <ul class="navbar-nav ml-auto">
                         {{#if logged_in}}
                         <li class="nav-item active">
@@ -43,24 +42,6 @@
                         </li>
                         {{/if}}
                     </ul>
-=======
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav ml-auto">
-                            {{#if logged_in}}
-                            <li class="nav-item active">
-                                <a class="nav-link" href="/dashboard">Dashboard</a>
-                            </li>
-                            <li class="nav-item">
-                                <button class="nav-link" id="logout">Logout</button>
-                            </li>
-                            {{else}}
-                            <li>
-                                <a class="nav-link" href="/login">Login</a>
-                            </li>
-                            {{/if}}
-                        </ul>
-                    </div>
->>>>>>> Stashed changes
                 </div>
             </nav>
         </header>
@@ -72,7 +53,6 @@
             {{{body}}}
         </section>
 </main>
-<!-- for additional scripts here if needed -->
 {{#if logged_in}}
 <script src="/js/logout.js"></script>
 {{/if}}
