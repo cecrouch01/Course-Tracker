@@ -37,13 +37,11 @@ router.get('/dashboard', withAuth, async (req, res) => {
                     model: Assignment,
                 }   
             },
-            
             ],
             attributes: ['id','email', 'first_name', 'last_name']
         }
         )
         const user = userData.get({ plain: true })
-        //await web push
         res.render('dashboard', {
             user,
             logged_in: req.session.logged_in 
@@ -77,6 +75,9 @@ router.get('/', async (req, res) => {
 
 router.get('/course/:id', withAuth, async (req, res) => {
     try{
+        const userData = await User.findByPk(req.session.user_id, {
+                attributes: ['id','email', 'first_name', 'last_name'],
+        })
         const courseData = await Course.findByPk(req.params.id, {
             include: [
                 {
@@ -96,10 +97,13 @@ router.get('/course/:id', withAuth, async (req, res) => {
                 user_id: req.session.user_id
             }
         })
+       
+        const user = userData.get({ plain: true })
         const goals = userCourseGoals.map((goal) => goal.get({ plain: true }))
         const notes = userCourseNotes.map((note) => note.get({ plain: true }))
         const course = courseData.get({ plain: true })
         res.render('course', {
+            user,
             course,
             goals,
             notes,
