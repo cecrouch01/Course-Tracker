@@ -14,7 +14,6 @@
     flex: 1;
   }
 
-<<<<<<< Updated upstream
 .navbar-nav {
     display: flex;
     -ms-flex-direction: column;
@@ -30,18 +29,13 @@
 #footer {
 /* position: absolute; */
 /* bottom: 0;
-=======
-footer {
-  margin-bottom: 0;
-bottom: 0;
->>>>>>> Stashed changes
 left: 0;
 right: 0; 
 padding: 20px 0;
 background-color: #343a40;
 color: white;
 text-align: center;
-width: 100%;
+width: 100%;*/
 }
 /* Background image for everything */
 .bg-image {
@@ -213,4 +207,3 @@ body, html {
     flex-direction: column;
     min-height: 100%;
 }
-
