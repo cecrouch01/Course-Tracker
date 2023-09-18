@@ -173,3 +173,7 @@ a:hover {
 .footer-content {
     width: 100%;
 }
+
+.custom-control-input:checked ~ .custom-control-label::before {
+    background-color: #28a745;
+}
